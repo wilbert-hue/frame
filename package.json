@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "convert:aluminium": "node scripts/convert-aluminium-excel.js"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",

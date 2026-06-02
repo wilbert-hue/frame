@@ -82,6 +82,17 @@ body {
   background: #cbd5e1;
 }
 
+/* Filter inputs: readable text on light backgrounds (avoids dark-mode placeholder fade) */
+.filter-panel input::placeholder {
+  color: #4b5563;
+  opacity: 1;
+}
+
+.filter-panel input {
+  color: #111827;
+  background-color: #ffffff;
+}
+
 /* Smooth transitions for all interactive elements */
 button, a, input, select, .card {
   transition: all 0.2s ease;

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Market Analysis Dashboard",
-  description: "Interactive dashboard with charts and analytics",
+  title: "Aluminium Frame Market — Project Tracking",
+  description: "Project tracking database for the Global Aluminium Frame Market",
 };
 
 export default function RootLayout({

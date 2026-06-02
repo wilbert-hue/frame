@@ -21,6 +21,7 @@ export interface ProjectRecord {
   'Vendor Registration Portal'?: string
   'Prequalification Requirements'?: string
   'Tender / RFQ Reference'?: string
+  'Structure Requirement'?: string
   'Expected Tender Date'?: string
   'Current Status'?: string
   'Opportunity Rating'?: string
@@ -36,6 +37,7 @@ export interface ProjectDatasetMeta {
   totalRows: number
   activeProjects: number
   demoRows?: number
+  columns?: string[]
 }
 
 export interface ProjectDataset {
@@ -63,28 +65,30 @@ export const DEFAULT_PROJECT_FILTERS: ProjectFilters = {
   currentStatuses: [],
 }
 
-export const TABLE_COLUMNS: { key: keyof ProjectRecord | string; label: string; defaultVisible?: boolean }[] = [
-  { key: 'Project No.', label: 'Project No.', defaultVisible: true },
-  { key: 'Tracking Period', label: 'Tracking Period', defaultVisible: true },
-  { key: 'Project Name', label: 'Project Name', defaultVisible: true },
-  { key: 'Project Developer / Owner', label: 'Developer / Owner', defaultVisible: true },
-  { key: 'Project Type', label: 'Project Type', defaultVisible: true },
-  { key: 'Region / Zone', label: 'Region / Zone', defaultVisible: true },
-  { key: 'City', label: 'City', defaultVisible: true },
-  { key: 'Project Value (USD)', label: 'Project Value (USD)', defaultVisible: true },
-  { key: 'Project Stage', label: 'Project Stage', defaultVisible: true },
-  { key: 'Procurement Channel', label: 'Procurement Channel', defaultVisible: false },
-  { key: 'EPC / Main Contractor', label: 'EPC / Main Contractor', defaultVisible: true },
-  { key: 'PMC / Consultant', label: 'PMC / Consultant', defaultVisible: false },
-  { key: 'Key Decision Maker', label: 'Key Decision Maker', defaultVisible: false },
-  { key: 'Designation', label: 'Designation', defaultVisible: false },
-  { key: 'Contact Number', label: 'Contact Number', defaultVisible: false },
-  { key: 'Email ID', label: 'Email ID', defaultVisible: false },
-  { key: 'Vendor Registration Portal', label: 'Vendor Portal', defaultVisible: false },
-  { key: 'Prequalification Requirements', label: 'Prequalification', defaultVisible: false },
-  { key: 'Tender / RFQ Reference', label: 'Tender / RFQ', defaultVisible: false },
-  { key: 'Expected Tender Date', label: 'Expected Tender Date', defaultVisible: true },
-  { key: 'Current Status', label: 'Current Status', defaultVisible: true },
-  { key: 'Opportunity Rating', label: 'Opportunity Rating', defaultVisible: true },
-  { key: 'Remarks', label: 'Remarks', defaultVisible: true },
+/** All Excel columns in sheet order */
+export const TABLE_COLUMNS: { key: keyof ProjectRecord | string; label: string }[] = [
+  { key: 'Project No.', label: 'Project No.' },
+  { key: 'Tracking Period', label: 'Tracking Period' },
+  { key: 'Project Name', label: 'Project Name' },
+  { key: 'Project Developer / Owner', label: 'Project Developer / Owner' },
+  { key: 'Project Type', label: 'Project Type' },
+  { key: 'Region / Zone', label: 'Region / Zone' },
+  { key: 'City', label: 'City' },
+  { key: 'Project Value (USD)', label: 'Project Value (USD)' },
+  { key: 'Project Stage', label: 'Project Stage' },
+  { key: 'Procurement Channel', label: 'Procurement Channel' },
+  { key: 'EPC / Main Contractor', label: 'EPC / Main Contractor' },
+  { key: 'PMC / Consultant', label: 'PMC / Consultant' },
+  { key: 'Key Decision Maker', label: 'Key Decision Maker' },
+  { key: 'Designation', label: 'Designation' },
+  { key: 'Contact Number', label: 'Contact Number' },
+  { key: 'Email ID', label: 'Email ID' },
+  { key: 'Vendor Registration Portal', label: 'Vendor Registration Portal' },
+  { key: 'Prequalification Requirements', label: 'Prequalification Requirements' },
+  { key: 'Tender / RFQ Reference', label: 'Tender / RFQ Reference' },
+  { key: 'Structure Requirement', label: 'Structure Requirement' },
+  { key: 'Expected Tender Date', label: 'Expected Tender Date' },
+  { key: 'Current Status', label: 'Current Status' },
+  { key: 'Opportunity Rating', label: 'Opportunity Rating' },
+  { key: 'Remarks', label: 'Remarks' },
 ]

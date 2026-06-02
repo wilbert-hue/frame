@@ -29,6 +29,8 @@ export function applyProjectFilters(
         project['Project Developer / Owner'],
         project.City,
         project['EPC / Main Contractor'],
+        project['Structure Requirement'],
+        project['Tender / RFQ Reference'],
         project.Remarks,
         project['Project No.'],
       ]

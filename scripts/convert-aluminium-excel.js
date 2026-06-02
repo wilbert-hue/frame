@@ -101,6 +101,23 @@ const EPC_REMARKS = [
   'Pre-qualification for structural aluminium and curtain wall systems underway.',
   'Logistics hubs and industrial sheds — high potential for frame suppliers.',
 ]
+const STRUCTURE_REQUIREMENTS = [
+  'Modular Buildings, Clear Span Warehouses',
+  'Temporary & Clear Span Structures',
+  'Modular & Temporary Structures',
+  'Aluminium Frame Façade Systems',
+  'Clear Span Warehouses, Modular Facilities',
+  'Industrial Sheds, Portal Frame Structures',
+  'Workforce Camps, Site Offices',
+]
+const TENDER_REFERENCES = [
+  'Workforce Accommodation, Construction Camps, Logistics Warehousing',
+  'Event Infrastructure, Visitor Facilities, Sports Event Support',
+  'Hospitality Support Facilities, Site Offices, Construction Infrastructure',
+  'Visitor Facilities, Event Infrastructure',
+  'Construction Logistics Facilities, Warehousing Support',
+  'Package-specific contractor tenders',
+]
 
 function seededRandom(seed) {
   let s = seed
@@ -134,7 +151,9 @@ function fixRedSeaRow(row) {
     'Vendor Registration Portal': 'Red Sea Global Vendor Registration',
     'Prequalification Requirements':
       'Supplier Registration, Sustainability Compliance, Technical Qualification',
-    'Tender / RFQ Reference': 'Project-specific procurement',
+    'Tender / RFQ Reference':
+      'Hospitality Support Facilities, Site Offices, Construction Infrastructure',
+    'Structure Requirement': 'Modular & Temporary Structures',
     'Expected Tender Date': 'Ongoing',
     'Current Status': 'Active Procurement',
     'Opportunity Rating': 'High',
@@ -168,7 +187,8 @@ function buildDemoProject(index, template) {
     'Vendor Registration Portal': `${template.name} Supplier Portal`,
     'Prequalification Requirements':
       'Company Profile, CR, VAT, Financials, HSE, Technical Capability',
-    'Tender / RFQ Reference': 'Package-specific contractor tenders',
+    'Tender / RFQ Reference': pick(rand, TENDER_REFERENCES),
+    'Structure Requirement': pick(rand, STRUCTURE_REQUIREMENTS),
     'Expected Tender Date': pick(rand, TENDER_DATES),
     'Current Status': pick(rand, STATUSES),
     'Opportunity Rating': pick(rand, RATINGS),
@@ -179,7 +199,10 @@ function buildDemoProject(index, template) {
 }
 
 const wb = XLSX.readFile(EXCEL_FILE)
-const rows = XLSX.utils.sheet_to_json(wb.Sheets['Project Tracker'])
+const sheet = wb.Sheets['Project Tracker']
+const rows = XLSX.utils.sheet_to_json(sheet)
+const headerRow = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0] || []
+const excelColumns = headerRow.filter((h) => h != null && String(h).trim() !== '')
 
 const projects = []
 for (let i = 0; i < 50; i++) {
@@ -210,6 +233,7 @@ const meta = {
   totalRows: 50,
   activeProjects: projects.length,
   demoRows: projects.filter((p) => p._isDemo).length,
+  columns: excelColumns,
 }
 
 fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true })

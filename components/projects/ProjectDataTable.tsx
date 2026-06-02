@@ -4,8 +4,6 @@ import { useMemo, useState } from 'react'
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
 import type { ProjectRecord } from '@/lib/project-types'
 import { TABLE_COLUMNS } from '@/lib/project-types'
-import { useProjectStore } from '@/lib/project-store'
-
 interface ProjectDataTableProps {
   rows: ProjectRecord[]
 }
@@ -13,17 +11,10 @@ interface ProjectDataTableProps {
 type SortDir = 'asc' | 'desc'
 
 export function ProjectDataTable({ rows }: ProjectDataTableProps) {
-  const { showAllColumns, setShowAllColumns } = useProjectStore()
   const [sortKey, setSortKey] = useState<string>('Project No.')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
-  const columns = useMemo(
-    () =>
-      TABLE_COLUMNS.filter((col) =>
-        showAllColumns ? true : col.defaultVisible !== false
-      ),
-    [showAllColumns]
-  )
+  const columns = TABLE_COLUMNS
 
   const sortedRows = useMemo(() => {
     const copy = [...rows]
@@ -76,22 +67,12 @@ export function ProjectDataTable({ rows }: ProjectDataTableProps) {
 
   return (
     <div className="w-full">
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <div>
-          <h3 className="text-base font-semibold text-gray-900">Project Tracking Table</h3>
-          <p className="text-xs text-gray-500 mt-0.5">
-            {sortedRows.length} row{sortedRows.length !== 1 ? 's' : ''} · click column headers to sort
-          </p>
-        </div>
-        <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showAllColumns}
-            onChange={(e) => setShowAllColumns(e.target.checked)}
-            className="rounded border-gray-300 text-teal-600 focus:ring-teal-500"
-          />
-          Show all columns
-        </label>
+      <div className="mb-4">
+        <h3 className="text-base font-semibold text-gray-900">Project Tracking Table</h3>
+        <p className="text-xs text-gray-500 mt-0.5">
+          {sortedRows.length} row{sortedRows.length !== 1 ? 's' : ''} · {columns.length} columns ·
+          click headers to sort
+        </p>
       </div>
 
       <div className="overflow-auto border border-gray-200 rounded-lg bg-white max-h-[calc(100vh-20rem)]">
